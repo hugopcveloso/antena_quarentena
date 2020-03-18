@@ -1,0 +1,9 @@
+
+<%= simple_form_for @community do |f| %>
+
+
+  <%= f.input :name, label: 'Nome', class: 'form-group' %>
+  <%= f.input :description, label: 'Descrição', input_html: {rows: 6}, class: 'form-control' %>
+  <%= f.submit "Criar Comunidade", class: "btn btn-primary" %>
+
+<% end %>
