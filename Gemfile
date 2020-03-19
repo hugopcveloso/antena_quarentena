@@ -20,7 +20,6 @@ gem 'webpacker'
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'rubocop', require: false
-
   gem 'rubocop-performance', require: false
 end
 

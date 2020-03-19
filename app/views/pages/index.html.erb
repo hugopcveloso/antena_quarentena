@@ -30,15 +30,13 @@
     </div>
     <div class="col-4">
       <p class = 'h5 mb-2'>Comunidades Trending</p>
-      <div class = 'card'>
-        <ul class="list-group">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-      </div>
+        <div class = 'card'>
+          <ul class="list-group">
+             <% @communities.each do |community| %>
+              <li class="list-group-item"><%= link_to community.name, community_path(community) %></li>
+            <% end %>
+          </ul>
+        </div>
       <%= link_to "View all", communities_path, class: "btn btn-primary mt-2" %>
     </div>
   </div>

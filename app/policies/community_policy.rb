@@ -5,11 +5,11 @@ class CommunityPolicy < ApplicationPolicy
     end
   end
 
-  def index
+  def index?
     true
   end
 
-  def show
+  def show?
     true
   end
 
