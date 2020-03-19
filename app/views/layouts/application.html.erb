@@ -10,17 +10,20 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <%= yield %>
+    <div id = "page-container">
+      <div id = "content-wrap">
+        <%= render 'shared/navbar' %>
+        <%= render 'shared/flashes' %>
+        <div class="container mb-4">
+          <div class="row">
+            <div class="col-sm-12 pt-4">
+              <%= yield %>
+            </div>
+          </div>
         </div>
       </div>
+      <%= render 'shared/footer' %>
     </div>
-    <%= render 'shared/footer' %>
-
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

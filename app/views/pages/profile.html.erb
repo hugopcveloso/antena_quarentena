@@ -1,0 +1,12 @@
+
+<div class="row">
+  <div class="col-sm-8">
+    <%= render partial: "./posts/list", posts: @posts %>
+  </div>
+  <div class="col-sm-4">
+    <%= @profile.full_name %>
+    <%= @profile.username %>
+    <p> <%= @profile.bio %> </p>
+    <p> Desde: <%= @profile.created_at.strftime("%d/%m/%Y") %> </p>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-<div class="container">
   <div class="row">
     <div class="col">
       <h3>Trending Posts</h3>
@@ -26,13 +25,14 @@
   <div class="row">
 
     <div class="col-8">
-      left col (wide)
+      <%= render partial: "posts/list" %>
     </div>
+
     <div class="col-4">
       <p class = 'h5 mb-2'>Comunidades Trending</p>
         <div class = 'card'>
           <ul class="list-group">
-             <% @communities.each do |community| %>
+            <% @communities.each do |community| %>
               <li class="list-group-item"><%= link_to community.name, community_path(community) %></li>
             <% end %>
           </ul>
@@ -40,4 +40,3 @@
       <%= link_to "View all", communities_path, class: "btn btn-primary mt-2" %>
     </div>
   </div>
-</div>

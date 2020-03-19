@@ -3,12 +3,11 @@ class CommunitiesController < ApplicationController
   before_action :fetch_community, only: [:show]
 
   def index
-    raise
-    @communities = policy_scope(Community).limit(5)
-
+    @communities = policy_scope(Community)
   end
 
   def show
+    @posts = @community.posts
   end
 
   def new

@@ -1,0 +1,9 @@
+
+<%= simple_form_for [@community, @post] do |f| %>
+
+
+  <%= f.input :title, label: 'Título', class: 'form-group' %>
+  <%= f.input :body, label: 'Post', input_html: {rows: 11}, class: 'form-control' %>
+  <%= f.submit "Criar Post", class: "btn btn-primary" %>
+
+<% end %>
