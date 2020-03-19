@@ -11,13 +11,13 @@ AllCops:
     - 'test/**/*'
 
 ConditionalAssignment:
-  Enabled: false
+  Enabled: true
 StringLiterals:
   Enabled: false
 RedundantReturn:
   Enabled: false
 Documentation:
-  Enabled: false
+  Enabled: true
 WordArray:
   Enabled: false
 AbcSize:
@@ -39,6 +39,6 @@ Style/FrozenStringLiteralComment:
 LineLength:
   Max: 120
 Style/EmptyMethod:
-  Enabled: false
+  Enabled: true
 Bundler/OrderedGems:
   Enabled: false

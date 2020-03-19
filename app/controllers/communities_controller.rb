@@ -7,14 +7,24 @@ class CommunitiesController < ApplicationController
 
   def show
     authorize @community
-
   end
 
-  def create
-  end
+
 
   def new
-    @community = Community.new
+    @communit= Community.new
     authorize @community
+  end
+
+
+  def create
+     @community = Comunity.new
+  end
+
+
+  private
+
+  def community_params
+
   end
 end
