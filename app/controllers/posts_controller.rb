@@ -1,12 +1,15 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :fetch_post, only: [:show]
+  before_action :auth_subscriber, only: [:new]
 
   def index
     @posts = policy_scope(Posts)
   end
 
   def show
+    @post = Post.includes(:comments).find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -31,7 +34,7 @@ class PostsController < ApplicationController
   private
 
   def fetch_post
-    @post = Post.find(params[:id])
+    @post = Post.includes(:comments).find(params[:id])
     authorize @post
   end
 
@@ -40,6 +43,14 @@ class PostsController < ApplicationController
     authorize @community
   end
 
+  def auth_subscriber
+    fetch_community
+    unless Subscription.where(community_id: @community.id, user_id: current_user.id).any?
+      redirect_to root_path, flash: { danger: "Desculpa não estás autorizado a estar nesta página"}
+    else
+
+    end
+  end
 
   def post_params
     params.require(:post).permit(:title, :body)

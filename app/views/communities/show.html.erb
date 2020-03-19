@@ -1,18 +1,30 @@
-<div class="d-flex justify-content-between">
-  <h3> <%= @community.name %> </h3>
-  <%= link_to "Cria um novo Post", new_community_post_path(@community), class: "btn btn-primary float-right" %>
-</div>
-
-<%#= Aqui é preciso iterar todos os posts %>
-<div class="row mt-3">
+<div class="row mb-4">
   <div class="col-sm-8">
-    <% @posts.each do |post| %>
-      <%= render partial: "posts/list" %>
+    <h3> <%= @community.name %> </h3>
+  </div>
+  <div class="col-sm-4">
+    <% if @is_subscribed %>
+        <%= link_to "Cria um novo Post", new_community_post_path(@community), class: "btn btn-primary float-right"%>
+    <% else %>
+        <%= render partial: "communities/subscribe", locals: { community_id: @community.id} %>
     <% end %>
   </div>
-
-  <div class="col-sm-4 p-5">
-        <p><%= @community.description %></p>
-        <p> <%= @community.rules  %></p>
-  </div>
 </div>
+  <%#= Aqui é preciso iterar todos os posts %>
+  <div class="row mt-3">
+    <div class="col-sm-8">
+      <% @posts.each do |post| %>
+        <%= render partial: "posts/list" %>
+      <% end %>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card p-3">
+          <p class = 'h5'>Acerca desta Comunidade</p>
+          <p class = mt-2> <small><%= @community.description  %></small> </p>
+          <p> <%= pluralize @subscriber_count, "Membro" %> </p>
+        </div>
+        <p> <%= @community.rules  %></p>
+    </div>
+  </div>
+
