@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'u/:username'=> "pages#profile", as: :profile
   resources :communities do
     resources :posts
-      resources :comments
   end
 
   resources :comments, only: [:show]

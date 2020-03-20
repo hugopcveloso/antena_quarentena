@@ -8,8 +8,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:comments).find(params[:id])
-    @comment = Comment.new
   end
 
   def new
@@ -34,7 +32,7 @@ class PostsController < ApplicationController
   private
 
   def fetch_post
-    @post = Post.includes(:comments).find(params[:id])
+    @post = Post.find(params[:id])
     authorize @post
   end
 
