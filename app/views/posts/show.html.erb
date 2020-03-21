@@ -1,15 +1,17 @@
 <h2> <%= @post.title %></h2>
  <%=  simple_format @post.body %>
-  <div id='post-comments'>
-    <%= render partial: "posts/comments", locals: { comments: @post.comments } %>
-  </div>
- <h4> Contribui </h4>
-<%#= simple_form_for @comment , method: :post do |f|   %>
-  <%#= f.input :message, placeholder: "O teu comentário...", class: "form-control" %>
-  <%#= f.submit "Comenta", class: "btn btn-primary mt-3" %>
-<% #end %>
 
-<%= form_for comment_path, method: :post, remote: true do |f|  %>
-  <%= f.text_area :message, placeholder: "O teu comentário...", class: "form-control" %>
-  <%= f.submit "Comenta", class: "btn btn-primary mt-3" %>
-<% end %>
+ <h4> Contribui </h4>
+  <p> Comment Form</p>
+  <h3>Comments</h3>
+
+  <%= simple_form_for [@post, @comment], url: community_post_comments_path(@post.community.id, @post.id), method: :post do |f| %>
+    <%= f.input :body, placeholder: "Add a comment" %>
+    <%= f.submit "Add Comment", class: 'btn btn-primary' %>
+  <% end %>
+  <br>
+
+    <ul>
+       <%= render partial: @post.comments %>
+    </ul>
+

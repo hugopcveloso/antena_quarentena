@@ -5,8 +5,12 @@ class CommentPolicy < ApplicationPolicy
     end
   end
 
-
-  def create
+  def new?
     true
   end
+
+  def create?
+    true
+  end
+
 end
