@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :fetch_post, only: [:show]
+  before_action :fetch_post, only: [:show, :edit, :update, :destroy]
   before_action :auth_subscriber, only: [:new]
 
   def index
@@ -8,6 +8,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    authorize @comment
   end
 
   def new
@@ -29,6 +31,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    redirect_to @post if @post.save(article_params)
+  end
+
+  def destroy
+    redirect_to :back if @post.destroy
+  end
+
   private
 
   def fetch_post
@@ -45,8 +58,6 @@ class PostsController < ApplicationController
     fetch_community
     unless Subscription.where(community_id: @community.id, user_id: current_user.id).any?
       redirect_to root_path, flash: { danger: "Desculpa não estás autorizado a estar nesta página"}
-    else
-
     end
   end
 

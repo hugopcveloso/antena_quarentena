@@ -1,26 +1,27 @@
 class CommentsController < ApplicationController
+  before_action :find_commentable, only: [:new, :create]
+
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.user_id = current_user_id
+    @comment = @commentable.comments.new(comment_params)
+    @comment.user_id = current_user
     @comment.save
-    respond_to do |format|
-      format.js {
-        if @comment.save
-          @comments = Comment.where(post_id: @comment.post_id)
-          render "comments/create"
-        else
-          #unable to save
-        end
-      }
-    end
+    authorize @comment
+     redirect_back(fallback_location: root_path)
   end
-
+ #community_post GET    /communities/:community_id/posts/:id(.:format)
 
   private
 
   def comment_params
-    params.require(:comment).permit(:message, :post_id)
+    params.require(:comment).permit(:body, :post_id, :comment_id)
   end
 
+  def find_commentable
+    if params[:comment_id]
+      @commentable = Comment.find(params[:comment_id])
+    elsif params[:post_id]
+      @commentable = Post.find(params[:post_id])
+    end
+  end
 end

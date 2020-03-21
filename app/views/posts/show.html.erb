@@ -3,3 +3,15 @@
 
  <h4> Contribui </h4>
   <p> Comment Form</p>
+  <h3>Comments</h3>
+
+  <%= simple_form_for [@post, @comment], url: community_post_comments_path(@post.community.id, @post.id), method: :post do |f| %>
+    <%= f.input :body, placeholder: "Add a comment" %>
+    <%= f.submit "Add Comment", class: 'btn btn-primary' %>
+  <% end %>
+  <br>
+
+    <ul>
+       <%= render partial: @post.comments %>
+    </ul>
+

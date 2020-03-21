@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'comments/new'
+  get 'comments/create'
   root to: 'pages#index'
   get 'u/:username'=> "pages#profile", as: :profile
   resources :communities do
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
   end
 
-  resources :comments, only: [:show]
+  resources :comments do
+    resources :comments
+  end
+
   resources :subscriptions
   devise_for :users
 
