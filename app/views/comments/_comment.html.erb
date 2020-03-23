@@ -1,14 +1,48 @@
-<div class = 'card p-2'>
-<li>
-  <p> <%= comment.body %> </p>
+<div class = 'border-left'>
+<li class = 'mt-2'>
+  <div class="col-12">
+    <p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
+    <p> <%= comment.body %> </p>
 
-  <%= simple_form_for [comment, Comment.new] do |f| %>
-      <%= f.text_area :body, placeholder: "Add a Reply" %>
-      <%= f.submit "Reply", class: 'btn btn-primary'  %>
-      <% end %>
-  <ul>
-      <%= render comment.comments %>
-  </ul>
+     <div class="dropdown d-flex justify-content-around">
+      <a class="" href="#" role="button" id="dropdownMenuLink"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <p><i class="fas fa-reply"></i> Responde </p>
+      </a>
+      <p> Share </p>
+      <p> Send </p>
+
+      <div class="dropdown-menu p-3 dropdown-menu-left col-12">
+        <%= simple_form_for [comment, Comment.new] do |f| %>
+        <form class="px-4 py-3">
+          <div class="form-group">
+            <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
+          </div>
+          <%= f.submit "Responde", class: 'btn btn-primary'  %>
+        </form>
+       <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%#= simple_form_for [comment, Comment.new] do |f| %>
+      <%#= f.text_area :body, placeholder: "Add a Reply" %>
+      <%#= f.submit "Reply", class: 'btn btn-primary'  %>
+      <%# end %>
+<!--       <button type="button" class="collapsible-btn" >Open Collapsible</button>
+ -->
+
+
 
 </li>
 </div>
+    <% if comment.comments.size >= 1 %>
+    <button type="button" data-toggle = "collapse" class="collapsible-btn" data-target="#demo" >Open Collapsible</button>
+    <% end %>
+      <%# if comment.comments_count >= 1 %>
+        <ul >
+            <%= render comment.comments, class: "collapse", id: "demo" %>
+        </ul>
+
+
+      <%# end %>

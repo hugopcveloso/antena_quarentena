@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params)
-    @comment.user_id = current_user
+    @comment.user= current_user
     @comment.save
     authorize @comment
      redirect_back(fallback_location: root_path)

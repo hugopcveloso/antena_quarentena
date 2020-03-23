@@ -1,0 +1,19 @@
+
+  <div class="dropdown">
+    <a class="btn btn-outline dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Reply
+    </a>
+
+
+    <div class="dropdown-menu p-3 dropdown-menu-right">
+      <%= simple_form_for [comment, Comment.new] do |f| %>
+      <form class="px-4 py-3">
+        <div class="form-group">
+          <%= f.text_area :body, placeholder: "Add a Reply", class: 'form-control' %>
+        </div>
+        <%= f.submit "Reply", class: 'btn btn-primary'  %>
+      </form>
+     <% end %>
+    </div>
+  </div>
