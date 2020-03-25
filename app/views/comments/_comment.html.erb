@@ -1,58 +1,51 @@
-<div class = 'border-left'>
-<li class = 'mt-2'>
-  <div class="col-12">
-    <p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
-    <p> <%= comment.body %> </p>
 
-     <div class="dropdown d-flex justify-content-around">
-      <a class="" href="#" role="button" id="dropdownMenuLink"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <p><i class="fas fa-reply"></i> Responde </p>
-      </a>
-      <p> Share </p>
-      <p> Send </p>
-
-      <div class="dropdown-menu p-3 dropdown-menu-left col-12">
-        <%= simple_form_for [comment, Comment.new] do |f| %>
-        <form class="px-4 py-3">
-          <div class="form-group">
-            <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
+<div id="accordion<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>">
+  <div class="comment-card border-left">
+    <div class=" m-3" id="headingOne">
+        <li class = 'mt-2'>
+        <div class="col-12">
+          <p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
+          <p> <%= comment.body %> </p>
+          <div class="dropdown d-flex justify-content-around">
+            <a class="" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <p><i class="fas fa-reply"></i> Responde </p>
+            </a>
+            <p> Share </p>
+            <p> Send </p>
+            <div class="dropdown-menu p-3 dropdown-menu-left col-12">
+              <%= simple_form_for [comment, Comment.new] do |f| %>
+                <form class="px-4 py-3">
+                  <div class="form-group">
+                    <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
+                  </div>
+                  <%= f.submit "Responde", class: 'btn btn-primary'  %>
+                </form>
+              <% end %>
+            </div>
+          <% if comment.comments.present? %>
+            <button class="btn btn-link" data-toggle="collapse"
+            data-target="#collapse<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>" aria-expanded="true" aria-controls="collapseOne">
+            See comments<%= comment_iteration.index+1 %>
+            </button>
+          <% end %>
           </div>
-          <%= f.submit "Responde", class: 'btn btn-primary'  %>
-        </form>
-       <% end %>
+
+
+        </div>
+        </li>
+
+    </div>
+
+    <div id="collapse<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>" class="collapse show" aria-labelledby="headingOne"
+      data-parent="#accordion<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>">
+      <div class="border-left">
+        <ul>
+          <%= render comment.comments, locals: { comment: comment.comments.order(:upvotes)} %>
+        </ul>
       </div>
     </div>
   </div>
 
-  <%#= simple_form_for [comment, Comment.new] do |f| %>
-      <%#= f.text_area :body, placeholder: "Add a Reply" %>
-      <%#= f.submit "Reply", class: 'btn btn-primary'  %>
-      <%# end %>
-<!--       <button type="button" class="collapsible-btn" >Open Collapsible</button>
- -->
 
-
-                 <%  comment_iteration.index  %>
-</li>
 </div>
-    <% if comment.comments.size >= 1 %>
-    <button type="button" data-toggle = "collapse"
-    class="collapsible-btn" data-target=".demo"
-    data-parent = "<%= comment_iteration.index.to_s if comment == comment.comments.last.root_index %>" >Open Collapsible</button>
-    <% end %>
-      <%# if comment.comments_count >= 1 %>
-        <ul>
-          <% if comment.comments.size >= 2 %>
-            <div class="<%= 'collapse demo' if comment == comment.comments.last.root_index %> ">
-              <div class= "collapse demo" id= "">
-                <%= render comment.comments, locals: { comment: comment.comments.order(:title)} %>
-              </div>
-            </div>
-          <% end %>
-        </ul>
-
-  <script>
-
-
-  </script>

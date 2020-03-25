@@ -2,14 +2,14 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable
   belongs_to :user
-  after_create :increment_count
+  after_create :nested_count
 
 
   def find_post
     Post.find(self.commentable_id)
   end
 
-  def increment_count
+  def nested_count
     parent = commentable
     a = []
     while parent.is_a?(Comment)
