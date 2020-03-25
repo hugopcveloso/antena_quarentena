@@ -1,44 +1,43 @@
-
-<div id="accordion<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>">
+<div id="accordion<%= comment.id.to_words.delete(' ') %>">
   <div class="comment-card border-left">
-    <div class=" m-3" id="headingOne">
+    <div class="card p-3" id="headingOne">
         <li class = 'mt-2'>
         <div class="col-12">
           <p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
           <p> <%= comment.body %> </p>
-          <div class="dropdown d-flex justify-content-around">
-            <a class="" href="#" role="button" id="dropdownMenuLink"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class=" d-flex justify-content-around">
+            <a class="btn btn-link" href="#" role="button" id="ReplyCollapse"
+              data-toggle="collapse" data-target = "#collapseForm<%= comment.id.to_words.delete(' ') %>" aria-haspopup="true" aria-expanded="false">
               <p><i class="fas fa-reply"></i> Responde </p>
             </a>
-            <p> Share </p>
-            <p> Send </p>
-            <div class="dropdown-menu p-3 dropdown-menu-left col-12">
+            <p  class="btn btn-link"> Share </p>
+            <p  class="btn btn-link"> Send </p>
+            <% unless comment.comments.size == 0 %>
+              <button class="btn btn-link" data-toggle="collapse"
+              data-target="#collapse<%= comment.id.to_words.delete(' ') %>" aria-expanded="true" aria-controls="collapseOne">
+                <p> <i class="fas fa-chevron-down">
+                </i> (<%= comment.comments.count %>) </p>
+              </button>
+            <% end %>
+          </div>
+          <div id="collapseForm<%= comment.id.to_words.delete(' ') %>" class="collapse" aria-labelledby="headingOne"
+            data-parent="#ReplyCollapse">
+            <div class="border-left">
               <%= simple_form_for [comment, Comment.new] do |f| %>
-                <form class="px-4 py-3">
+                <form class="w-100">
                   <div class="form-group">
                     <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
                   </div>
-                  <%= f.submit "Responde", class: 'btn btn-primary'  %>
+                  <%= f.submit "Responde", class: 'btn btn-primary float-right'  %>
                 </form>
               <% end %>
             </div>
-          <% if comment.comments.present? %>
-            <button class="btn btn-link" data-toggle="collapse"
-            data-target="#collapse<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>" aria-expanded="true" aria-controls="collapseOne">
-            See comments<%= comment_iteration.index+1 %>
-            </button>
-          <% end %>
           </div>
-
-
         </div>
         </li>
-
     </div>
-
-    <div id="collapse<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>" class="collapse show" aria-labelledby="headingOne"
-      data-parent="#accordion<%= (comment_iteration.index+1).to_words.capitalize + comment.comments_count.to_words %>">
+    <div id="collapse<%= comment.id.to_words.delete(' ') %>" class="collapse show" aria-labelledby="headingOne"
+      data-parent="#accordion<%= comment.id.to_words.delete(' ') %>">
       <div class="border-left">
         <ul>
           <%= render comment.comments, locals: { comment: comment.comments.order(:upvotes)} %>
@@ -46,6 +45,8 @@
       </div>
     </div>
   </div>
-
-
 </div>
+<script>
+
+
+</script>
