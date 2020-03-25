@@ -13,9 +13,7 @@
   <%#= Aqui é preciso iterar todos os posts %>
   <div class="row mt-3">
     <div class="col-sm-8">
-      <% @posts.each do |post| %>
         <%= render partial: "posts/list" %>
-      <% end %>
     </div>
 
     <div class="col-sm-4">
