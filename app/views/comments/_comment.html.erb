@@ -33,16 +33,26 @@
  -->
 
 
-
+                 <%  comment_iteration.index  %>
 </li>
 </div>
     <% if comment.comments.size >= 1 %>
-    <button type="button" data-toggle = "collapse" class="collapsible-btn" data-target="#demo" >Open Collapsible</button>
+    <button type="button" data-toggle = "collapse"
+    class="collapsible-btn" data-target=".demo"
+    data-parent = "<%= comment_iteration.index.to_s if comment == comment.comments.last.root_index %>" >Open Collapsible</button>
     <% end %>
       <%# if comment.comments_count >= 1 %>
-        <ul >
-            <%= render comment.comments, class: "collapse", id: "demo" %>
+        <ul>
+          <% if comment.comments.size >= 2 %>
+            <div class="<%= 'collapse demo' if comment == comment.comments.last.root_index %> ">
+              <div class= "collapse demo" id= "">
+                <%= render comment.comments, locals: { comment: comment.comments.order(:title)} %>
+              </div>
+            </div>
+          <% end %>
         </ul>
 
+  <script>
 
-      <%# end %>
+
+  </script>

@@ -28,21 +28,19 @@ class Comment < ApplicationRecord
     parent.increment! :comments_count
   end
 
-
   def root_index
     parent = commentable
     a = []
-    while parent.is_a?(Comment)
-      a << parent
-      parent = parent.commentable
-    end
+      while parent.is_a?(Comment)
+        a << parent
+        parent = parent.commentable unless parent.is_a?(Post)
+      end
     a.last
+  end
 
-   end
+  def children
 
-   def children
-
-   end
+  end
 
 end
 
