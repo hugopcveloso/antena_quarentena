@@ -1,1 +1,2 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+A pet project of a Reddit type app that focuses on the upcoming changes in the economy and how can people adapt to them. 
+
