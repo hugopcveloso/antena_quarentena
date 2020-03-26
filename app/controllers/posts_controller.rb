@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :fetch_post, only: [:show, :edit, :update, :destroy]
+  before_action :fetch_post, only: [:show, :edit, :update, :destroy, :upvote]
   before_action :auth_subscriber, only: [:new]
 
   def index
@@ -40,6 +40,11 @@ class PostsController < ApplicationController
 
   def destroy
     redirect_to :back if @post.destroy
+  end
+
+  def upvote
+    @post.upvote_from User.find(session[:user_id])
+    redirect_to(:controller => "posts", :action => "show", :id => @post.id)
   end
 
   private
