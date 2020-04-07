@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     authorize @comment
     post = Post.find(@comment.root_post.id)
     community = post.community
+    testing = 'bla'
       redirect_to community_post_path(community, post, anchor: "accordion#{@comment.id.to_words.delete(' ')}")
   end
  #community_post GET    /communities/:community_id/posts/:id(.:format)
