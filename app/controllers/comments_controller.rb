@@ -4,10 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params)
-    @comment.user= current_user
+    @comment.user = current_user
     @comment.save
     authorize @comment
-     redirect_back(fallback_location: root_path)
+    post = Post.find(@comment.root_post.id)
+    community = post.community
+      redirect_to community_post_path(community, post, anchor: "accordion#{@comment.id.to_words.delete(' ')}")
   end
  #community_post GET    /communities/:community_id/posts/:id(.:format)
 
@@ -25,3 +27,12 @@ class CommentsController < ApplicationController
     end
   end
 end
+  #def create
+#    @comment = @commentable.comments.new(comment_params)
+#    @comment.user = current_user
+#    post_id = @comment.root_index.id
+#    post = Post.find(post_id)
+#    @comment.save
+#    authorize @comment
+#      redirect_to community_post_path(community, post, anchor: "#collapse#{@comment.id.to_words.delete(' ')}")
+#  end

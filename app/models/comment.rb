@@ -38,9 +38,22 @@ class Comment < ApplicationRecord
     a.last
   end
 
+  def root_post
+    parent = self.commentable
+    a = []
+    if self.commentable.is_a?(Post)
+      return parent
+    else
+      while parent.is_a?(Comment)
+        a << parent
+        return self if parent.is_a?(Post)
+        parent = parent.commentable
+      end
+      a.last.commentable
+    end
+  end
   def children
 
   end
 
 end
-

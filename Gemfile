@@ -3,6 +3,7 @@ ruby '2.6.5'
 gem 'to_words'
 gem 'bootsnap', require: false
 gem 'devise'
+gem 'turbolinks', '~> 5.2.0'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'puma'

@@ -23,7 +23,7 @@
           <div id="collapseForm<%= comment.id.to_words.delete(' ') %>" class="collapse" aria-labelledby="headingOne"
             data-parent="#ReplyCollapse">
             <div class="border-left">
-              <%= simple_form_for [comment, Comment.new] do |f| %>
+              <%= simple_form_for([comment, Comment.new], remote:true) do |f| %>
                 <form class="w-100">
                   <div class="form-group">
                     <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
