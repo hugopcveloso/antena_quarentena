@@ -26,7 +26,7 @@
               <%= simple_form_for([comment, Comment.new], remote:true) do |f| %>
                 <form class="w-100">
                   <div class="form-group">
-                    <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control' %>
+                    <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control', id: "form-field" %>
                   </div>
                   <%= f.submit "Responde", class: 'btn btn-primary float-right'  %>
                 </form>
@@ -46,7 +46,3 @@
     </div>
   </div>
 </div>
-<script>
-
-
-</script>
