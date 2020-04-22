@@ -1,0 +1,31 @@
+.container-upvotes{
+	text-align:center;
+	padding:0px;
+}
+.upvote  {
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+		padding-bottom: 10px;
+    color:black;
+    &.active {
+        color:purple;
+    }
+}
+
+
+.downvote  {
+	display: block;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color:black;
+	&.active {
+			color:purple;
+	}
+}
+
+.post-total-votes{
+	text-align: center;
+
+}

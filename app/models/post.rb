@@ -5,4 +5,8 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
+
+  def total_votes
+    return self.upvotes - self.downvotes
+  end
 end

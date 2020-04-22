@@ -16,11 +16,10 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'solargraph'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
 end
 
 group :development, :test do
