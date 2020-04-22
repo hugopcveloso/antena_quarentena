@@ -1,9 +1,10 @@
 class VotesController < ApplicationController
 	def create
-		post_id = params[:vote][:post_id]
-		vote = Vote.new(vote_params)
+		post_id = params[:post_id]
+		vote = Vote.new
+		vote.post_id = params[:post_id]
 		vote.user_id = current_user.id
-		
+		authorize vote
     #check if vote by this user exists
 		existing_vote = Vote.where(user_id: current_user.id, post_id: post_id)
 		respond_to do |format| 
@@ -22,6 +23,7 @@ class VotesController < ApplicationController
 			end
 			render "votes/create"
 			}
+		end
 	end
 
   private
