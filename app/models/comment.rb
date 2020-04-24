@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable
   belongs_to :user
   after_create :nested_count
-
+  has_many :votes, as: :votable
 
   def find_post
     Post.find(self.commentable_id)
@@ -20,7 +20,7 @@ class Comment < ApplicationRecord
     self.save
   end
 
-  def increment_counasdft
+  def increment_count
   parent = commentable
     while parent.is_a? Comment
       parent = parent.commentable

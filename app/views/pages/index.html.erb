@@ -1,6 +1,17 @@
   <div class="row">
     <div class="col">
       <h3>Trending Posts</h3>
+      <div class="flex-center mt-4" data-controller="counter">
+        <div class="counter">
+          <span data-target="counter.count">bla</span>
+        </div>
+        <button 
+          class="btn btn-outline-secondary"
+          data-action="click->counter#refresh"
+        >
+          Refresh counter
+        </button>
+      </div>
     </div>
   </div>
   <div class="row">

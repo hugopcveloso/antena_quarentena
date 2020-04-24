@@ -1,17 +1,36 @@
 class VotesController < ApplicationController
-	def create
-		post_id = params[:post_id]
-		vote = Vote.new
-		authorize vote
 
-		
+	def create
+		vote = Vote.new
 		vote.user_id = current_user.id
 		vote.upvote = params[:upvote]
-		vote.post_id = params[:post_id]
-		
-	#check if vote by this user exists
-		existing_vote = Vote.where(user: current_user, post_id: post_id)
+		vote.votable_type = params[:votable_type]
+		vote.votable_id = params[:votable_id]
+		authorize vote
+
+		if vote.votable_type == 'Post'
+			existing_vote = Vote.where(user: current_user, votable_id: post_id)
+		else
+			existing_vote = Vote.where(user: current_user, votable_id: vote.votable_id )
+		end
 		@new_vote = existing_vote.size < 1
+
+		respond_to do |format| 
+			format.json {
+				if existing_vote.size > 0 
+					existing_vote.first.destroy
+				else
+					if restaurant.save
+						render json: { success: true }
+					else
+						render json: { success: false, errors: restaurant.errors.messages }, status: :unprocessable_entity 
+					end
+				end
+			}
+		end
+	end
+rnf
+
 
 		respond_to do |format| 
 			format.js { 
@@ -28,14 +47,15 @@ class VotesController < ApplicationController
 				@post = Post.find(post_id)
 				@is_upvote = params[:upvote]
 				authorize @post
-				 
+					
 				render "votes/create"
 			}
 		end
 	end
 
-  private
-  def vote_params 
-    params.require(:vote).permit(:post_id, :upvote)
-  end
+	private
+	def vote_params 
+		params.require(:vote).permit(:post_id, :upvote)
+	end
+
 end
