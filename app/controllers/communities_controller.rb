@@ -10,6 +10,7 @@ class CommunitiesController < ApplicationController
     @posts = @community.posts
     @subscriber_count = @community.subscribers.count
     @subscription = Subscription.new
+    authorize @posts
   end
 
   def new

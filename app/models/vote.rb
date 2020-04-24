@@ -16,6 +16,6 @@ class Vote < ApplicationRecord
 
   def decrement_vote
     field = self.upvote ? :upvotes : :downvotes
-    Post.find(self.post_id).increment(field).save
+    Post.find(self.post_id).decrement(field).save
   end
 end

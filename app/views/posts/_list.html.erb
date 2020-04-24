@@ -1,10 +1,10 @@
  <% @posts.each do |post| %>
   <div class="card pl-2 pr-2 pt-1 pb-1 mb-2">
-    <div class="d-flex align-items-center justify-content-center">
-        <div class="col-1 container-upvotes">
-          <div class="fa fa-arrow-up upvote"> </div>
-          <span class="post-total-votes"> <%= post.total_votes %></span>
-          <div class="fa fa-arrow-down downvote"> </div>
+    <div class="d-flex align-items-center">
+        <div id="vote-actions-<%= post.id %>" class="col-1 vote" data-id="<%= post.id %>">
+          <div class="fa fa-arrow-up upvote  <%= is_upvoted post %>"> </div>
+          <span class="font-weight-bold score"> <%= post.score %></span>
+          <div class="fa fa-arrow-down downvote <%= is_downvoted post %> "> </div>
         </div>
         <div class="card-body col-11">
           <h4><%= link_to post.title, community_post_path(post.community,post) %></h4>
