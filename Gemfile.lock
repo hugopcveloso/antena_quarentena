@@ -178,6 +178,10 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
+    simple_token_authentication (1.17.0)
+      actionmailer (>= 3.2.6, < 7)
+      actionpack (>= 3.2.6, < 7)
+      devise (>= 3.2, < 6)
     solargraph (0.38.6)
       backport (~> 1.1)
       benchmark
@@ -251,6 +255,7 @@ DEPENDENCIES
   redis
   sassc-rails
   simple_form
+  simple_token_authentication
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)

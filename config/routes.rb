@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     resources :comments
   end
   
-  post "post/vote" => "votes#create"
+  resources :votes
+  
 
   resources :subscriptions
   devise_for :users

@@ -13,21 +13,19 @@ class Vote < ApplicationRecord
   end
 
   def increment_vote
+    field = self.upvote ? :upvotes : :downvotes
     if self.votable_type == 'Post'
-      field = self.upvote ? :upvotes : :downvotes
       Post.find(self.votable_id).increment(field).save
     else 
-      field = self.upvote ? :upvotes : :downvotes
       Comment.find(self.votable_id).increment(field).save
     end
   end
 
   def decrement_vote
+    field = self.upvote ? :upvotes : :downvotes
     if self.votable_type == 'Post'
-      field = self.upvote ? :upvotes : :downvotes
       Post.find(self.votable_id).decrement(field).save
     else 
-      field = self.upvote ? :upvotes : :downvotes
       Comment.find(self.votable_id).decrement(field).save
     end
   end
