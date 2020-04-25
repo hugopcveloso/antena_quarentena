@@ -4,14 +4,13 @@
         <div 
             id="vote-actions" 
             data-controller="vote"
-            data-controller="loader"
             class="col-1 vote"
-            data-loader-community="<%= post.community.id %>"
+            data-controller="updater"
             >
           <div class="fa fa-arrow-up upvote <%= is_upvoted post %>" data-action="click->vote#upvote"> </div>
           <span class="score-<%= post.id %>" 
-          data-target="vote.score" 
-          data-target="loader.votes"
+          data-target="vote.score"
+          data-target="updater.count"
           > <%= post.score %> </span>
           <div class="fa fa-arrow-down downvote <%= is_downvoted post %>" data-action="click->vote#downvote"> </div>
 
@@ -32,3 +31,7 @@
 
 
 
+ <%# data-controller="loader"
+data-loader-refresh-interval="5000"
+data-loader-community="<%= post.community.id %>"
+<%#=data-target="loader.votes"  %>           

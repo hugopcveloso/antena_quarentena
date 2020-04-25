@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = [ 'score' ]
 
   upvote = (event) => {
-    event.preventDefault()
     const elementClass = this.scoreTarget.classList.value
     const elementId = parseInt(elementClass.replace(/\D/g,''),10);
 
@@ -41,7 +40,6 @@ export default class extends Controller {
     )
   }
   downvote = (event) => {
-    event.preventDefault()
     const elementClass = this.scoreTarget.classList.value
     const elementId = parseInt(elementClass.replace(/\D/g,''),10);
 
@@ -72,9 +70,6 @@ export default class extends Controller {
       }
     })
   }
-
-
-
 };
 
   
