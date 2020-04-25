@@ -15,11 +15,11 @@ class VotesController < ApplicationController
 		@new_vote = existing_vote.size < 1
 		voted = vote.votable_type == 'Post' ? Post.find(vote.votable_id) : Vote.find(vote.votable_id)
 		respond_to do |format| 
-
 			format.json {
 				if existing_vote.size > 0 
+					last_vote = existing_vote[0].upvote
 					existing_vote.first.destroy
-					render json: { success: true, type: 'remove', newvote: false, all_votes: voted.upvotes}
+					render json: { success: true, type: 'remove', newvote: false, all_votes: voted.upvotes, last_vote: last_vote}
 				else
 					if vote.save
 						voted = vote.votable_type == 'Post' ? Post.find(vote.votable_id) : Vote.find(vote.votable_id)

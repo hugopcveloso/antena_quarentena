@@ -10,6 +10,13 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new
     authorize @comment
+    respond_to do |format|
+    
+      format.html
+			format.json {
+        render json: { success: true, total_votes: @post.upvotes  }
+			}
+		end 
   end
 
   def new

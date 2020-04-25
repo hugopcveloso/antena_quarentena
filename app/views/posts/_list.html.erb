@@ -1,12 +1,17 @@
  <% @posts.each do |post| %>
   <div class="card pl-2 pr-2 pt-1 pb-1 mb-2">
     <div class="d-flex align-items-center">
-        <div id="vote-actions" data-controller="vote" class="col-1 vote" ">
+        <div 
+            id="vote-actions" 
+            data-controller="vote"
+            data-controller="loader"
+            class="col-1 vote"
+            data-loader-community="<%= post.community.id %>"
+            >
           <div class="fa fa-arrow-up upvote <%= is_upvoted post %>" data-action="click->vote#upvote"> </div>
           <span class="score-<%= post.id %>" 
-          data-target="vote.score"
-          data-controller="vote" 
-          data-vote-community="<%= post.community.id %>"
+          data-target="vote.score" 
+          data-target="loader.votes"
           > <%= post.score %> </span>
           <div class="fa fa-arrow-down downvote <%= is_downvoted post %>" data-action="click->vote#downvote"> </div>
 
