@@ -12,26 +12,26 @@ class VotesController < ApplicationController
 		else
 			existing_vote = Vote.where(user: current_user, votable_id: vote.votable_id )
 		end
-
 		@new_vote = existing_vote.size < 1
+		voted = vote.votable_type == 'Post' ? Post.find(vote.votable_id) : Vote.find(vote.votable_id)
 		respond_to do |format| 
 
 			format.json {
 				if existing_vote.size > 0 
 					existing_vote.first.destroy
+					render json: { success: true, type: 'remove', newvote: false, all_votes: voted.upvotes}
 				else
 					if vote.save
-						render json: { success: true, test: 'test' }
+						voted = vote.votable_type == 'Post' ? Post.find(vote.votable_id) : Vote.find(vote.votable_id)
+						render json: { success: true, type: vote.upvote, newvote: @new_vote, all_votes: voted.upvotes }
 					else
 						render json: { success: false }, status: :unprocessable_entity
 					end
 				end
 			}
- 
 		end
-		@post = vote.votable_type == 'Post' ? Post.find(vote.votable_id) : Vote.find(vote.votable_id)
-		@is_upvote = params[:upvote]
-		authorize @post
+	
+ 	 
 	end
 end
 

@@ -1,6 +1,6 @@
 module VotesHelper
 	
-	def is_upvoted post
+	def is_upvoted(post)
 		user_signed_in? && current_user.upvoted_post_ids.include?(post.id) ? "active" : "" 
 	end
 

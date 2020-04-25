@@ -16,8 +16,6 @@ export default class extends Controller {
 // the goal is to create the vote from a fetch.  
 // I also could try to create a vote from a link, preventDefault
 // use the data action from the click to update the view. 
- 
- 
   upvote = (event) => {
     event.preventDefault()
     const elementClass = this.scoreTarget.classList.value
@@ -35,14 +33,27 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data.success.test)
-      console.log(this.scoreTarget.innerHTML ++)
-      
-    })
+      console.log(this.scoreTarget.innerHTML)
+      console.log(data.newvote)
+       const active = data.type ? 'active' : ''
+      if (data.newvote === true) {
+        this.element.children[0].classList.remove("active")
+        this.element.children[2].classList.remove("active")
+        if (data.type === true) {
+          event.target.classList.add("active")
+          this.scoreTarget.innerHTML = parseInt(data.all_votes,10)
+        } else {
+          this.element.children[0].classList.remove("active")
+        }
+      } else {
+        this.scoreTarget.innerHTML = parseInt(data.all_votes,10) - 1
+        this.element.children[0].classList.remove("active")
+      }
+      }
+    )
   }
   downvote = (event) => {
     event.preventDefault()
-
     const elementClass = this.scoreTarget.classList.value
     const elementId = parseInt(elementClass.replace(/\D/g,''),10);
 
@@ -58,10 +69,31 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data.success)
-      console.log(this.scoreTarget.innerHTML ++)
+      console.log(this.scoreTarget.innerHTML)
+      console.log(data.newvote)
+      console.log(parseInt(data.all_votes - 1))
+      const active = data.type ? 'active' : ''
+      if (data.newvote === true) {
+        this.element.children[0].classList.remove("active")
+        this.element.children[2].classList.remove("active")
+        if (data.type === false) {
+          this.element.children[2].classList.add("active")
+          this.scoreTarget.innerHTML = parseInt(data.all_votes,10) - 1
+        } else {
+          this.element.children[2].classList.remove("active") 
+        }
+      } else {
+        this.scoreTarget.innerHTML = parseInt(data.all_votes,10) 
+        this.element.children[2].classList.remove("active")
+      }
+    
+    
     })
   }
+
+  
+
+
 };
 
   
