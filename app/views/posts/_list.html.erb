@@ -3,7 +3,11 @@
     <div class="d-flex align-items-center">
         <div id="vote-actions" data-controller="vote" class="col-1 vote" ">
           <div class="fa fa-arrow-up upvote <%= is_upvoted post %>" data-action="click->vote#upvote"> </div>
-          <span class="score-<%= post.id %>" data-target="vote.score"> <%= post.score %> </span>
+          <span class="score-<%= post.id %>" 
+          data-target="vote.score"
+          data-controller="vote" 
+          data-vote-community="<%= post.community.id %>"
+          > <%= post.score %> </span>
           <div class="fa fa-arrow-down downvote <%= is_downvoted post %>" data-action="click->vote#downvote"> </div>
 
 

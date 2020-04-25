@@ -6,7 +6,9 @@ export default class extends Controller {
   static targets = [ 'score' ]
 
   connect() {
-
+    const bla = [this.data.get("community");
+    setInterval(this.refresh(bla), 5000);
+     
   }
 
   // upvote = () => {
@@ -16,6 +18,7 @@ export default class extends Controller {
 // the goal is to create the vote from a fetch.  
 // I also could try to create a vote from a link, preventDefault
 // use the data action from the click to update the view. 
+
   upvote = (event) => {
     event.preventDefault()
     const elementClass = this.scoreTarget.classList.value
@@ -89,6 +92,17 @@ export default class extends Controller {
     
     
     })
+  }
+
+  refresh = (bla) => {
+    console.log(bla)
+    // const url = '/communities/${}/posts'
+    // fetch('/posts', { headers: { accept: 'application/json' } })
+    //   .then(response => response.json())
+    //   .then((data) => {
+    //     console.log(data)
+    //     // this.countTarget.innerText = data.restaurants.length;
+    //   });
   }
 
   
