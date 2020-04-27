@@ -7,7 +7,7 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @posts = @community.posts
+    @posts = @community.posts.sort_by{ |c| c.score }.reverse
     @subscriber_count = @community.subscribers.count
     @subscription = Subscription.new
     authorize @posts

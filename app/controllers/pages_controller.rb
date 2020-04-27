@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def index
     @communities = policy_scope(Community).limit(5)
-    @posts = policy_scope(Post).order(id: :desc).limit(10)
+    @posts = policy_scope(Post).sort_by{ |c| c.score }.reverse.first(10)
    end
 
   def profile
