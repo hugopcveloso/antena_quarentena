@@ -2,6 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :posts
+  acts_as_token_authenticatable
   has_many :comments
   has_many :votes
   has_many :communities, through: :subscriptions
@@ -19,12 +20,20 @@ class User < ApplicationRecord
   end
 
   def upvoted_post_ids
-    self.votes.where(upvote: true).pluck(:post_id)
-    
+    self.votes.where(upvote: true, votable_type: "Post").pluck(:votable_id)
   end
 
   def downvoted_post_ids
-    self.votes.where(upvote: false).pluck(:post_id)
+    self.votes.where(upvote: false, votable_type: "Post").pluck(:votable_id)
+	end
+
+	def upvoted_comments_ids
+    self.votes.where(upvote: true, votable_type: "Comment").pluck(:votable_id)
   end
+
+	def downvoted_comments_ids
+    self.votes.where(upvote: false, votable_type: "Comment").pluck(:votable_id)
+	end
+	
 
 end

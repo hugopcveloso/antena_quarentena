@@ -4,7 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {},
+	"settings": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+	},
 	"emmet.includeLanguages": {}
 }
 

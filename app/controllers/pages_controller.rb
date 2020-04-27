@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   def index
     @communities = policy_scope(Community).limit(5)
     @posts = policy_scope(Post).order(id: :desc).limit(10)
-  end
+   end
 
   def profile
     @profile = User.find_by_username(params[:username])

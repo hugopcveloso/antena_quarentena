@@ -1,15 +1,23 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :fetch_post, only: [:show, :edit, :update, :destroy, :upvote]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :fetch_post, only: %i[show edit update destroy upvote]
   before_action :auth_subscriber, only: [:new]
 
   def index
     @posts = policy_scope(Posts)
   end
 
-  def show
+	def show
+		@post = Post.find(params[:id])
+    @comments = @post.comments.sort_by{ |c| c.score }.reverse
     @comment = Comment.new
     authorize @comment
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: { success: true, total_votes: @post.upvotes }
+      end
+    end
   end
 
   def new
@@ -42,11 +50,6 @@ class PostsController < ApplicationController
     redirect_to :back if @post.destroy
   end
 
-  def upvote
-    @post.upvote_from User.find(session[:user_id])
-    redirect_to(:controller => "posts", :action => "show", :id => @post.id)
-  end
-
   private
 
   def fetch_post
@@ -62,7 +65,7 @@ class PostsController < ApplicationController
   def auth_subscriber
     fetch_community
     unless Subscription.where(community_id: @community.id, user_id: current_user.id).any?
-      redirect_to root_path, flash: { danger: "Desculpa não estás autorizado a estar nesta página"}
+      redirect_to root_path, flash: { danger: "Desculpa não estás autorizado a estar nesta página" }
     end
   end
 
