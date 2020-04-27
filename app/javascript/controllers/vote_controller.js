@@ -57,7 +57,7 @@ export default class extends Controller {
       const active = data.type ? 'active' : ''
       if (data.newvote === true) {
         if (data.type === false) {
-					this.element.children[2].classList.add("active")
+					event.target.classList.add("active")
 					console.log(this.element.children[2])
           this.scoreTarget.innerHTML = parseInt(data.all_votes,10) - 1
         }
