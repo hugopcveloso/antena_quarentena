@@ -11,11 +11,11 @@ class Comment < ApplicationRecord
     Post.find(self.commentable_id)
   end
 
-	# comments score
+	# comments calc_score
 	def score
     if self.upvotes > 0 || self.downvotes > 0
       self.upvotes > 0 ? ( self.upvotes - self.downvotes ) : (self.downvotes * -1)
-    else
+		else
       0
     end
   end
@@ -62,9 +62,6 @@ class Comment < ApplicationRecord
       end
       a.last.commentable
     end
-  end
-  def children
-
   end
 
 end

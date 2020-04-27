@@ -7,26 +7,24 @@ class Vote < ApplicationRecord
   after_destroy :decrement_vote
 
   private
-  
-  def type
-    
-  end
+ 
 
   def increment_vote
     field = self.upvote ? :upvotes : :downvotes
-    if self.votable_type == 'Post'
-      Post.find(self.votable_id).increment(field).save
+		if self.votable_type == 'Post'
+			post = Post.find(self.votable_id).increment(field).save
     else 
-      Comment.find(self.votable_id).increment(field).save
+			comment = Comment.find(self.votable_id).increment(field).save
     end
   end
 
   def decrement_vote
     field = self.upvote ? :upvotes : :downvotes
     if self.votable_type == 'Post'
-      Post.find(self.votable_id).decrement(field).save
+			post = Post.find(self.votable_id).decrement(field).save
     else 
-      Comment.find(self.votable_id).decrement(field).save
+			comment = Comment.find(self.votable_id).decrement(field).save
     end
-  end
+	end
+	
 end

@@ -17,16 +17,15 @@ export default class extends Controller {
         "Content-Type": "application/json",
         'X-CSRF-Token': csrfToken(),
       },
-      // credentials: "same-origin",
       body: JSON.stringify({ votable_id: elementId, votable_type: votableType, upvote: true })
     })
     .then(response => response.json())
     .then((data) => {
- 
       this.element.children[0].classList.remove("active")
       this.element.children[2].classList.remove("active")
       if (data.newvote === true) {
         if (data.type === true) {
+					console.log(event.target.classList)
           event.target.classList.add("active")
           this.scoreTarget.innerHTML = parseInt(data.all_votes,10)
         }
@@ -49,7 +48,6 @@ export default class extends Controller {
         "Content-Type": "application/json",
         'X-CSRF-Token': csrfToken(),
       },
-      // credentials: "same-origin",
       body: JSON.stringify({ votable_id: elementId, votable_type: votableType, upvote: false })
     })
     .then(response => response.json())
@@ -59,7 +57,8 @@ export default class extends Controller {
       const active = data.type ? 'active' : ''
       if (data.newvote === true) {
         if (data.type === false) {
-          this.element.children[2].classList.add("active")
+					this.element.children[2].classList.add("active")
+					console.log(this.element.children[2])
           this.scoreTarget.innerHTML = parseInt(data.all_votes,10) - 1
         }
       } else {
@@ -69,18 +68,3 @@ export default class extends Controller {
     })
   }
 };
-
-  
-    
-
-    
-  // $("#vote-actions-<%= @post.id %> .score").text("<%= @post.score %>");
-  // $("#vote-actions-<%= @post.id %> .downvote, #vote-actions-<%= @post.id%> .upvote").removeClass("active");
-  // <% if @new_vote %>
-  //   <% if @is_upvote == "true" %>
-  //     $("#vote-actions-<%= @post.id %> .upvote").addClass("active");
-  //   <% else %>
-  //     $("#vote-actions-<%= @post.id %> .downvote").addClass("active");	
-  //   <% end %>
-  // <% end %>
-  

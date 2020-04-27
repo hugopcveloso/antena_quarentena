@@ -1,6 +1,6 @@
 <div id="accordion<%= comment.id %>">
-  <div class="comment-card border-left">
-    <div class="card p-3" id="headingOne">
+  <div class="comment-card">
+    <div class="card p-3">
         <li class = 'mt-2'>
 					<div class="d-flex">
 						<% if user_signed_in? %>
@@ -10,9 +10,9 @@
 									class="col-1 vote"
 									data-vote-type="Comment"
 									>
-								<div class="fa fa-arrow-up upvote <%= is_upvoted comment %>" data-action="click->vote#upvote" > </div>
+								<div class="fa fa-arrow-up upvote <%= is_upvoted_comment comment %>" data-action="click->vote#upvote" > </div>
 								<span class="score-<%= comment.id %>" data-target="vote.score"> <%= comment.score %> </span>
-								<div class="fa fa-arrow-down downvote <%= is_downvoted comment %>" data-action="click->vote#downvote"> </div>
+								<div class="fa fa-arrow-down downvote <%= is_downvoted_comment comment %>" data-action="click->vote#downvote"> </div>
 							</div>
 						<% else %>
 								<div id="col-1 vote-actions" class="vote">
@@ -66,7 +66,7 @@
       data-parent="#accordion<%= comment.id %>">
       <div class="border-left">
         <ul>
-          <%= render comment.comments, locals: { comment: comment.comments.order(:upvotes)} %>
+          <%= render comment.comments.sort_by{ |c| c.score }.reverse %>
         </ul>
       </div>
     </div>

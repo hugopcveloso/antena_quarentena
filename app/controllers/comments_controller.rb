@@ -8,9 +8,10 @@ class CommentsController < ApplicationController
 		authorize @comment
 		post = Post.find(@comment.root_post.id)
 		community = post.community
-		anchor = "accordion#{@comment.id}"
+		
 		authorize @comment
-    if @comment.save
+		if @comment.save
+			anchor = "accordion#{@comment.id}"
 			redirect_to community_post_path(community, post, anchor: anchor)
 		else
 			redirect_to community_post_path(community, post)

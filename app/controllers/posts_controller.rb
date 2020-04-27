@@ -7,7 +7,9 @@ class PostsController < ApplicationController
     @posts = policy_scope(Posts)
   end
 
-  def show
+	def show
+		@post = Post.find(params[:id])
+    @comments = @post.comments.sort_by{ |c| c.score }.reverse
     @comment = Comment.new
     authorize @comment
     respond_to do |format|
