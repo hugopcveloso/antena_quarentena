@@ -8,7 +8,8 @@ export default class extends Controller {
   upvote = (event) => {
     const elementClass = this.scoreTarget.classList.value
     const elementId = parseInt(elementClass.replace(/\D/g,''),10);
-
+    
+    const votableType = this.data.get("type")
     fetch("/votes", {
       method: "POST", 
       headers: {
@@ -17,7 +18,7 @@ export default class extends Controller {
         'X-CSRF-Token': csrfToken(),
       },
       // credentials: "same-origin",
-      body: JSON.stringify({ votable_id: elementId, votable_type: "Post", upvote: true })
+      body: JSON.stringify({ votable_id: elementId, votable_type: votableType, upvote: true })
     })
     .then(response => response.json())
     .then((data) => {
@@ -30,11 +31,8 @@ export default class extends Controller {
           this.scoreTarget.innerHTML = parseInt(data.all_votes,10)
         }
       } else {
-        console.log(data.last_vote)
         const typeOfVote = data.last_vote ? -1 : 0
-        console.log(parseInt(data.all_votes,10))
         this.scoreTarget.innerHTML = parseInt(data.all_votes,10) + typeOfVote 
-
       }
       }
     )
@@ -64,7 +62,6 @@ export default class extends Controller {
           this.scoreTarget.innerHTML = parseInt(data.all_votes,10) - 1
         }
       } else {
-        console.log(data.last_vote)
         const typeOfVote = data.last_vote ? -1 : 0
         this.scoreTarget.innerHTML = parseInt(data.all_votes,10) + typeOfVote 
       }

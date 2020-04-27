@@ -1,21 +1,31 @@
  <% @posts.each do |post| %>
   <div class="card pl-2 pr-2 pt-1 pb-1 mb-2">
     <div class="d-flex align-items-center">
+    <% if user_signed_in? %>
         <div 
             id="vote-actions" 
             data-controller="vote"
             class="col-1 vote"
-            data-controller="updater"
+            data-vote-type="Post"
             >
-          <div class="fa fa-arrow-up upvote <%= is_upvoted post %>" data-action="click->vote#upvote"> </div>
-          <span class="score-<%= post.id %>" 
-          data-target="vote.score"
-          data-target="updater.count"
-          > <%= post.score %> </span>
+          <div class="fa fa-arrow-up upvote <%= is_upvoted post %>" data-action="click->vote#upvote" > </div>
+          <span class="score-<%= post.id %>" data-target="vote.score"> <%= post.score %> </span>
           <div class="fa fa-arrow-down downvote <%= is_downvoted post %>" data-action="click->vote#downvote"> </div>
-
-
-
+      <% else %>
+          <div id="vote-actions" class="col-1 vote">
+          <%= link_to(new_user_session_path) do %> 
+            <div class="fa fa-arrow-up upvote"> </div> 
+          <% end %>
+          
+          <span class="score-<%= post.id %>" 
+            data-target="vote.score"
+            data-target="updater.count"
+          > <%= post.score %> </span>
+          <%= link_to(new_user_session_path) do %> 
+            <div class="fa fa-arrow-down downvote"> </div>
+          <% end %>
+          
+      <% end %>
         </div>
         <div class="card-body col-11">
           <h4><%= link_to post.title, community_post_path(post.community,post) %></h4>
