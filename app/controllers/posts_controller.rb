@@ -48,11 +48,6 @@ class PostsController < ApplicationController
     redirect_to :back if @post.destroy
   end
 
-  def upvote
-    @post.upvote_from User.find(session[:user_id])
-    redirect_to(controller: "posts", action: "show", id: @post.id)
-  end
-
   private
 
   def fetch_post

@@ -20,12 +20,20 @@ class User < ApplicationRecord
   end
 
   def upvoted_post_ids
-    self.votes.where(upvote: true).pluck(:votable_id)
+    self.votes.where(upvote: true, votable_type: "Post").pluck(:votable_id)
   end
 
   def downvoted_post_ids
-    self.votes.where(upvote: false).pluck(:votable_id)
+    self.votes.where(upvote: false, votable_type: "Post").pluck(:votable_id)
+	end
+
+	def upvoted_comments_ids
+    self.votes.where(upvote: true, votable_type: "Comment").pluck(:votable_id)
   end
-  
+
+	def downvoted_comments_ids
+    self.votes.where(upvote: false, votable_type: "Comment").pluck(:votable_id)
+	end
+	
 
 end

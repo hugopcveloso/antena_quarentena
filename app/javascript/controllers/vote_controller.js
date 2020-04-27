@@ -40,6 +40,7 @@ export default class extends Controller {
   downvote = (event) => {
     const elementClass = this.scoreTarget.classList.value
     const elementId = parseInt(elementClass.replace(/\D/g,''),10);
+    const votableType = this.data.get("type")
 
     fetch("/votes", {
       method: "POST", 
@@ -49,7 +50,7 @@ export default class extends Controller {
         'X-CSRF-Token': csrfToken(),
       },
       // credentials: "same-origin",
-      body: JSON.stringify({ votable_id: elementId, votable_type: "Post", upvote: false })
+      body: JSON.stringify({ votable_id: elementId, votable_type: votableType, upvote: false })
     })
     .then(response => response.json())
     .then((data) => {

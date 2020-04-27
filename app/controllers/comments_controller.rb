@@ -4,13 +4,17 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
-    @comment.save
-    authorize @comment
-    post = Post.find(@comment.root_post.id)
-    community = post.community
-    anchor = "accordion#{@comment.id.to_words.delete(' ')}"
-      redirect_to community_post_path(community, post, anchor: anchor)
+		@comment.user = current_user
+		authorize @comment
+		post = Post.find(@comment.root_post.id)
+		community = post.community
+		anchor = "accordion#{@comment.id}"
+		authorize @comment
+    if @comment.save
+			redirect_to community_post_path(community, post, anchor: anchor)
+		else
+			redirect_to community_post_path(community, post)
+		end
   end
  #community_post GET    /communities/:community_id/posts/:id(.:format)
 

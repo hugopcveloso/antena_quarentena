@@ -3,10 +3,21 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable
   belongs_to :user
   after_create :nested_count
-  has_many :votes, as: :votable
+	has_many :votes, as: :votable
+	validates :body, presence: true
+	
 
   def find_post
     Post.find(self.commentable_id)
+  end
+
+	# comments score
+	def score
+    if self.upvotes > 0 || self.downvotes > 0
+      self.upvotes > 0 ? ( self.upvotes - self.downvotes ) : (self.downvotes * -1)
+    else
+      0
+    end
   end
 
   def nested_count

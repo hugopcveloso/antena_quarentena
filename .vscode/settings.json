@@ -1,5 +1,6 @@
 {
     "ruby.rubocop.executePath": "/home/user/.rbenv/shims/",
     "ruby.rubocop.configFilePath": "/home/user/code/hugopcveloso/covid_forum/.rubocop.yml",
-    "editor.tabSize": 2
+		"editor.tabSize": 2,
+		"editor.detectIndentation": false
 }

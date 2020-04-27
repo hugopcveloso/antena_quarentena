@@ -1,43 +1,69 @@
-<div id="accordion<%= comment.id.to_words.delete(' ') %>">
+<div id="accordion<%= comment.id %>">
   <div class="comment-card border-left">
     <div class="card p-3" id="headingOne">
         <li class = 'mt-2'>
-        <div class="col-12">
-          <p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
-          <p> <%= comment.body %> </p>
-          <div class=" d-flex justify-content-around">
-            <a class="btn btn-link" href="#" role="button" id="ReplyCollapse"
-              data-toggle="collapse" data-target = "#collapseForm<%= comment.id.to_words.delete(' ') %>" aria-haspopup="true" aria-expanded="false">
-              <p><i class="fas fa-reply"></i> Responde </p>
-            </a>
-            <p  class="btn btn-link"> Share </p>
-            <p  class="btn btn-link"> Send </p>
-            <% unless comment.comments.size == 0 %>
-              <button class="btn btn-link" data-toggle="collapse"
-              data-target="#collapse<%= comment.id.to_words.delete(' ') %>" aria-expanded="true" aria-controls="collapseOne">
-                <p> <i class="fas fa-chevron-down">
-                </i> (<%= comment.comments.count %>) </p>
-              </button>
-            <% end %>
-          </div>
-          <div id="collapseForm<%= comment.id.to_words.delete(' ') %>" class="collapse" aria-labelledby="headingOne"
-            data-parent="#ReplyCollapse">
-            <div class="border-left">
-              <%= simple_form_for([comment, Comment.new], remote:true) do |f| %>
-                <form class="w-100">
-                  <div class="form-group">
-                    <%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control', id: "form-field" %>
-                  </div>
-                  <%= f.submit "Responde", class: 'btn btn-primary float-right'  %>
-                </form>
-              <% end %>
-            </div>
-          </div>
-        </div>
+					<div class="d-flex">
+						<% if user_signed_in? %>
+							<div 
+									id="vote-actions" 
+									data-controller="vote"
+									class="col-1 vote"
+									data-vote-type="Comment"
+									>
+								<div class="fa fa-arrow-up upvote <%= is_upvoted comment %>" data-action="click->vote#upvote" > </div>
+								<span class="score-<%= comment.id %>" data-target="vote.score"> <%= comment.score %> </span>
+								<div class="fa fa-arrow-down downvote <%= is_downvoted comment %>" data-action="click->vote#downvote"> </div>
+							</div>
+						<% else %>
+								<div id="col-1 vote-actions" class="vote">
+									<%= link_to(new_user_session_path) do %> 
+										<div class="fa fa-arrow-up upvote"> </div> 
+									<% end %>
+									<span class="score-<%= post.id %>" data-target="vote.score"data-target="updater.count">
+										<%= post.score %> 
+									</span>
+									<%= link_to(new_user_session_path) do %> 
+										<div class="fa fa-arrow-down downvote"> </div>
+									<% end %>
+									</div>
+						<% end %>
+						<div class="col-11">
+							<p> <small> <%= comment.user.username %> <%= time_ago_in_words comment.created_at %> ago </small> </p>
+							<p> <%= comment.body %> </p>
+						</div>
+					</div>
+						<div class="d-flex justify-content-around card-buttons">
+							<a class="btn btn-link" href="#" role="button" id="ReplyCollapse"
+								data-toggle="collapse" data-target = "#collapseForm<%= comment.id %>" aria-haspopup="true" aria-expanded="false">
+								<p><i class="fas fa-reply"></i> Responde </p>
+							</a>
+							<p  class="btn btn-link"> Share </p>
+							<p  class="btn btn-link"> Send </p>
+							<% unless comment.comments.size == 0 %>
+								<button class="btn btn-link" data-toggle="collapse"
+								data-target="#collapse<%= comment.id %>" aria-expanded="true" aria-controls="collapseOne">
+									<p> <i class="fas fa-chevron-down">
+									</i> (<%= comment.comments.count %>) </p>
+								</button>
+							<% end %>
+						</div>
+						<div id="collapseForm<%= comment.id %>" class="collapse" aria-labelledby="headingOne"
+							data-parent="#ReplyCollapse">
+							<div class="border-left">
+								<%= simple_form_for([comment, Comment.new], remote:true) do |f| %>
+									<form class="w-100">
+										<div class="form-group">
+											<%= f.error_notification %>
+											<%= f.text_area :body, placeholder: "A tua resposta", class: 'form-control', id: "form-field" %>
+										</div>
+										<%= f.submit "Responde", class: 'btn btn-primary float-right'  %>
+									</form>
+								<% end %>
+							</div>
+						</div>
         </li>
-    </div>
-    <div id="collapse<%= comment.id.to_words.delete(' ') %>" class="collapse show" aria-labelledby="headingOne"
-      data-parent="#accordion<%= comment.id.to_words.delete(' ') %>">
+    <div id="collapse<%= comment.id %>" class="collapse show" aria-labelledby="headingOne"
+      data-parent="#accordion<%= comment.id %>">
       <div class="border-left">
         <ul>
           <%= render comment.comments, locals: { comment: comment.comments.order(:upvotes)} %>
