@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-
-  get 'comments/new'
-  get 'comments/create'
+	# ver se afecta
+  # get 'comments/new'
+  # get 'comments/create'
   root to: 'pages#index'
   get 'u/:username'=> "pages#profile", as: :profile
   resources :communities do
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :votes
-  
+  resources :categories 
 
   resources :subscriptions
   devise_for :users

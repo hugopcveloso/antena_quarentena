@@ -1,0 +1,11 @@
+<h1>Categories#new</h1>
+<p>Find me in app/views/categories/new.html.erb</p>
+<div class="col-8">
+    <%= simple_form_for @category do |f| %>
+      <%= f.input :name %>
+			<%= f.input :description %>
+      <%= f.submit 'Add item', class:'btn btn-info' %>
+    <% end %>
+  </div>
+</div>
+
