@@ -31,6 +31,9 @@ class Comment < ApplicationRecord
     self.save
   end
 
+
+	#Below are methods from an experiment that could be later be useful
+
   def increment_count
   parent = commentable
     while parent.is_a? Comment
