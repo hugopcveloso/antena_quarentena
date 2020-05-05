@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :fetch_community, only: [:show]
 
   def index
@@ -7,10 +7,9 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @posts = @community.posts.sort_by{ |c| c.score }.reverse
+    @posts = @community.posts.sort_by(&:score).reverse
     @subscriber_count = @community.subscribers.count
     @subscription = Subscription.new
-    authorize @posts
   end
 
   def new
