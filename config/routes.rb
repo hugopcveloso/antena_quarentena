@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'community_category/create'
+  get 'community_category/destroy'
 	# ver se afecta
   # get 'comments/new'
   # get 'comments/create'

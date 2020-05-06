@@ -1,0 +1,43 @@
+.category-badge {
+	text-overflow: ellipsis;
+}
+.about-community {
+	overflow: hidden;
+}
+
+.category-checkboxes {
+	display: none;
+}
+.card-category {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 15px;
+	align-content: space-evenly;
+}
+.card-category-content {
+	background-size: cover;
+	background-position: center;
+	height: 150px;
+	font-family: 'Roboto';
+	padding: 10px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 17px;
+	border-radius: 8px;
+	box-shadow: 1 1 15px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	&:hover {
+		font-weight: bold;
+		box-shadow: 2px 2px 6px lightgrey;
+	}
+}
+.active-category {
+	background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)) !important;
+	color: black;
+	font-weight: bold;
+
+	box-shadow: 1px 1px 6px lightgrey;
+}

@@ -1,2 +1,12 @@
 <h1>Categories#edit</h1>
 <p>Find me in app/views/categories/edit.html.erb</p>
+
+<div class="col-8">
+    <%= simple_form_for @category do |f| %>
+      <%= f.input :name %>
+			<%= f.input :description %>
+      <%= f.submit 'Add item', class:'btn btn-info' %>
+    <% end %>
+  </div>
+</div>
+

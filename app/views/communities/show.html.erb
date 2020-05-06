@@ -19,11 +19,17 @@
         <%= render partial: "posts/list" %>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 about-community">
         <div class="card p-3">
           <p class = 'h5'>Acerca desta Comunidade</p>
           <p class = mt-2> <small><%= @community.description  %></small> </p>
-          <p> <%= pluralize @subscriber_count, "Membro" %> </p>
+					<div> 
+					<% @community.categories.each do |category| %>
+						<li class="badge badge-primary category-badge"> <%= category.name %> </li>				
+					<% end %>
+					</div>
+
+					<p> <%= pluralize @subscriber_count, "Membro" %> </p>
         </div>
         <p> <%= @community.rules  %></p>
     </div>

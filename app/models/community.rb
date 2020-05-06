@@ -1,6 +1,7 @@
 class Community < ApplicationRecord
-	 belongs_to :user
-	 belongs_to :category
+	belongs_to :user
+	has_many :community_categories
+	has_many :categories, through: :community_categories
   has_many :posts
   has_many :subscriptions
   has_many :subscribers, through: :subscriptions, source: :user
