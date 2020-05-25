@@ -1,5 +1,4 @@
 .category-badge {
-	text-overflow: ellipsis;
 }
 .about-community {
 	overflow: hidden;
@@ -40,4 +39,9 @@
 	font-weight: bold;
 
 	box-shadow: 1px 1px 6px lightgrey;
+}
+
+.category-list {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

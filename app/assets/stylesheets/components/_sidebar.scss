@@ -1,0 +1,45 @@
+.sidebar-container {
+	height: 100%; /* 100% Full-height */
+	width: 300px; /* 0 width - change this with JavaScript */
+	background-color: white; /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+	padding-left: 0px;
+
+	.sidebar-links {
+		transition: all 1s;
+		padding-top: 150px;
+		font-size: 25px;
+		font-family: 'Space Mono';
+		li {
+			padding: 10px;
+			padding-left: 30px;
+			&:hover {
+				font-weight: bold;
+				transition: background-color 1s ease;
+				background-color: #d95362;
+				.sidebar-point {
+					color: white;
+					text-decoration: none;
+				}
+
+				color: white;
+			}
+		}
+
+		.sidebar-point {
+			color: black;
+		}
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	/* For desktop: */
+	.sidebar-container {
+		display: none;
+	}
+	.fake-sidebar {
+		display: none;
+	}
+}

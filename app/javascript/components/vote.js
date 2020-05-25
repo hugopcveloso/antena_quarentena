@@ -1,31 +1,16 @@
-// $(function () {
-// 	$(".vote").on("click", ".upvote, .downvote", function () {
-// 		var is_upvote = false
-// 		var post_id = $(this).parent().data("id"),
-// 			is_upvote = $(this).hasClass("upvote");
-// 		$.ajaxSetup({
-// 			headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-// 		});
-// 		$.ajax({
-// 			url: "/post/vote",
-// 			method: "POST",
-// 			data: { post_id: post_id, upvote: is_upvote },
-// 			success: function () {
-// 				console.log('success..');
-// 			}
-// 		})
+// const sidebarFunctions = () => {
+// 	const closeButton = document.getElementById('sidebar-close');
+// 	const clickButton = document.getElementById('button-menu');
+
+// 	clickButton.addEventListener('click', function() {
+// 		document.getElementById('mySidebar').style.width = '200px';
+// 		document.getElementById('main').style.opacity = '0.5';
 // 	});
-// });
-// console.log('vanilla js is loaded');
 
-// const voteWrapper = document.querySelectorAll('.vote');
+// 	closeButton.addEventListener('click', function() {
+// 		document.getElementById('mySidebar').style.width = '0';
+// 		document.getElementById('main').style.opacity = '1';
+// 	});
+// };
 
-
-//  for (let votingContainer of voteWrapper){ 
-//     votingContainer.addEventListener("click", () => {
-//         debugger
-//         let post_id = currentTarget;
-//         console.log('upvote for post' + post_id);
-//     });
-//  }
-
+// export { sidebarFunctions };

@@ -15,14 +15,18 @@
     <div id = "page-container">
       <div id = "content-wrap">
         <%= render 'shared/navbar' %>
+				<div class="layout-sidebar">
+					<%= render 'shared/sidebar'%>
+				</div>
         <%= render 'shared/flashes' %>
-        <div class="container mb-4">
-          <div class="row">
-            <div class="col-sm-12 pt-4">
+          <div class="main-layout">
+						<div class="col-sm-2 fake-sidebar">
+							<p> &nbsp; </p>	
+						</div>
+            <div class="col-sm-10 pt-4 offset-sm-2 yield-container">
               <%= yield %>
             </div>
           </div>
-        </div>
       </div>
       <%= render 'shared/footer' %>
     </div>

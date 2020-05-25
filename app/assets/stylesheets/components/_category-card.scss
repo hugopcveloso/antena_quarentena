@@ -1,0 +1,49 @@
+.pick-category-index {
+	background-color: white;
+	border-radius: 10px 10px 10px 10px;
+	padding: 40px 20px;
+	border: 0.5px solid #d0d0d0;
+}
+
+.homepage-categories {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 10px;
+}
+
+.category-card {
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+	border-radius: 10px 10px 0px 10px;
+	border: 0.5px solid #d0d0d0;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 47.43%, rgba(0, 0, 0, 0.7) 82.51%),
+		image-url('category-images/Agriculture.jpg');
+	position: top right;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 150px;
+	align-self: center;
+	p {
+		font-family: 'Space Mono';
+		font-weight: bold;
+		margin: 0px;
+		color: white;
+	}
+	&:hover {
+		transform: scale(1.02);
+		box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.322);
+	}
+}
+
+@media only screen and (max-width: 980px) {
+	/* For desktop: */
+	.homepage-categories {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+	}
+}
