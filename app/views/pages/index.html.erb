@@ -1,41 +1,47 @@
-	<div class="pick-category-index">
-		<h5>Categorias</h5>
-		<div class="homepage-categories">
-			<div class=" category-card">
-				<p> Agricultura <br>	Alimentação </p> 
-			</div>
-			<div class="category-card">
-			<p> Arquitectura <br>	Construção </p> 
-			</div>
-			<div class="category-card">
-				<p> Artes <br>	Multimédia </p> 
-			</div>
-			<div class="category-card">
-				<p> Ver mais </p> 
-			</div>
-		</div>
-	</div>
 	
-  <div class="row mt-4">
-    <div class="col">
-      <h5 class='mb-3 font-weight-bold'> Popular Posts</h5>
-    </div>
-  </div>
-  <div class="d-flex flex-wrap">
+	
 
-    <div class="col-sm-12 col-md-8 ">
+  <div class="d-flex flex-wrap">
+    <div class="col-sm-12 col-md-8 main-index-column">
+			<div class="pick-category-index">
+				<h5>Categorias</h5>
+				<div class="homepage-categories">
+					<div class=" category-card">
+						<p> Agricultura <br>	Alimentação </p> 
+					</div>
+					<div class="category-card">
+					<p> Arquitectura <br>	Construção </p> 
+					</div>
+					<div class="category-card">
+						<p> Artes <br>	Multimédia </p> 
+					</div>
+					<div class="category-card">
+						<p> Ver mais </p> 
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col">
+					<h5 class='mb-3 font-weight-bold'> Popular Posts</h5>
+				</div>
+			</div>
       <%= render partial: "posts/list" %>
     </div>
 
-    <div class="col-sm-12 col-md-4 ">
-      <p class = 'h5 mb-2'>Comunidades Trending</p>
-        <div class = 'card'>
-          <ul class="list-group">
-            <% @communities.each do |community| %>
-              <li class="list-group-item"><%= link_to community.name, community_path(community) %></li>
-            <% end %>
-          </ul>
-        </div>
+
+
+
+    <div class="col-sm-12 col-md-4 trending-communities-container">
+			<div class="trending-communities-header">
+				<h5 class = 'mb-2'>Comunidades Trending</h5>
+			</div>
+			<div class = ''>
+				<ul class="trending-communities-list">
+					<% @communities.each do |community| %>
+						<li class="trending-community-item"><%= link_to community.name, community_path(community) %></li>
+					<% end %>
+				</ul>
+			</div>
       <%= link_to "View all", communities_path, class: "btn btn-primary mt-2" %>
     </div>
   </div>
