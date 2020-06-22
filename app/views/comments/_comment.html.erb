@@ -19,8 +19,8 @@
 									<%= link_to(new_user_session_path) do %> 
 										<div class="fa fa-arrow-up upvote"> </div> 
 									<% end %>
-									<span class="score-<%= post.id %>" data-target="vote.score"data-target="updater.count">
-										<%= post.score %> 
+									<span class="score-<%= @post.id %>" data-target="vote.score"data-target="updater.count">
+										<%= @post.score %> 
 									</span>
 									<%= link_to(new_user_session_path) do %> 
 										<div class="fa fa-arrow-down downvote"> </div>
