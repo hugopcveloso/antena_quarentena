@@ -33,8 +33,8 @@
 						</div>
 					</div>
 						<div class="d-flex justify-content-around card-buttons">
-							<a class="btn btn-link" href="#" role="button" id="ReplyCollapse"
-								data-toggle="collapse" data-target = "#collapseForm<%= comment.id %>" aria-haspopup="true" aria-expanded="false">
+							<a class="btn btn-link" aria-controls="collapseForm<%= comment.id %>" role="button" id="ReplyCollapse"
+								data-toggle="collapse" href="#collapseForm<%= comment.id %>" aria-expanded="true">
 								<p><i class="fas fa-reply"></i> Responde </p>
 							</a>
 							<p  class="btn btn-link"> Share </p>
